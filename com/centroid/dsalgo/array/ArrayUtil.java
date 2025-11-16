@@ -1,4 +1,4 @@
-package com.hubberspot.dsalgo.array;
+package com.centroid.dsalgo.array;
 
 import java.util.Arrays;
 import java.util.HashMap;
