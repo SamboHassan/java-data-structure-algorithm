@@ -13,9 +13,9 @@ public class Main {
         boolean result = solutions.hasDuplicte(nums);
         System.out.println(result);
 
-//        int[] arr = {2,5,7,8,2};
-//        int[] ans = solutions.twoSum(arr, 10);
-//        System.out.print(Arrays.toString(ans));
+        int[] arr = {2,5,7,8,2};
+        int[] ans = solutions.twoSum(arr, 10);
+        System.out.print(Arrays.toString(ans));
 
         String[] anagrams = {"rat", "act", "tar", "pat", "dog", "art", "cat"};
         List<List<String>> answer = solutions.groupAnagrams(anagrams);

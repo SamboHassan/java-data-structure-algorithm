@@ -18,18 +18,34 @@ public class Solutions {
         if(s.length() != t.length()){
             return false;
         }
+        //convert both to lowercase to ignore case match
+        s = s.toLowerCase();
+        t = t.toLowerCase();
+
+        //strip of all the white spaces
+        s = s.replace(" ", "");
+        t = t.replace(" ", "");
+
+        //Initialize buckets array
         int[] count = new int[26];
+
+        //Fill the buckets
         for(int i=0; i<s.length(); i++){
             count[s.charAt(i) - 'a']++;
+        }
+
+        //Empty the buckets
+        for (int i =0 ; i<t.length() ; i++){
             count[t.charAt(i) - 'a']--;
         }
+
+        //check if all buckets are empty
         for(int i=0; i<26; i++){
             if(count[i] != 0){
                 return false;
             }
         }
         return true;
-
     }
     //YOU MUST KNOW THIS BY HEART
     public int[] twoSum(int[] numbers, int target){
@@ -73,4 +89,7 @@ public class Solutions {
         }
         return new ArrayList(ansMap.values());
     }
+
+    //        int[] numbers = {1,2,3,4,6,7,7};
+//        int[] numbers = {1,2,3,4,6,};
 }
