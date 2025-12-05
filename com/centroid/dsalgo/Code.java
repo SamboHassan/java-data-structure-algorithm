@@ -5,6 +5,9 @@ import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 
+//POINTER =
+//https://www.youtube.com/c/DestinationFAANG
+//https://www.youtube.com/watch?v=T0u5nwSA0w0   -- Neetcode 150
 public class Code {
     public static boolean isAnagram(String s, String t){
         if (s.length() != t.length()){
@@ -19,6 +22,7 @@ public class Code {
             count[s.charAt(i) - 'a']++;
             count[t.charAt(i) - 'a']--;
         }
+
         for (int i = 0 ; i<26 ; i++){
             if (count[i] != 0){
                 return false;

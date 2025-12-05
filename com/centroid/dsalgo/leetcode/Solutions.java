@@ -2,6 +2,12 @@ package com.centroid.dsalgo.leetcode;
 
 import java.util.*;
 
+//Contains duplicate
+//isAnagram
+//two sum
+//Group Anagram
+//238 - Leetcode: Produc of Array except self: 52:13
+
 public class Solutions {
     public boolean hasDuplicte(int[] nums) {
         HashSet<Integer> seenNumbers = new HashSet<>();
