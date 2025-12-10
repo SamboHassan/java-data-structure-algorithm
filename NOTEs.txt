@@ -29,12 +29,14 @@ Char,Index,Array Action,count after t
 
 ➡️ Conclusion on Correctness
 No, they are not all correct for all data types.
-
 1. s.length is only correct for arrays.
-
 2. s.length() is only correct for String objects.
-
 3. .size() is correct for all Collection and Map types.
+
+
+Iteration (i),numbers[i],Complement=9−numbers[i],Map Check?,Map Action
+0,2,9−2=7,Is 7 in the map? No.,"Add (2,0) to map."
+1,7,9−7=2,Is 2 in the map? Yes.,"2's index is 0. Return indices [0, 1]."
 
 
 

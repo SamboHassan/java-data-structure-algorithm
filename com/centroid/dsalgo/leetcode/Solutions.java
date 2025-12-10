@@ -98,6 +98,32 @@ public class Solutions {
      * @param target
      * @return
      *
+     * 📝 Algorithm in Plain English
+     * The goal is to find the indices (positions) of the two numbers in the input
+     * array (numbers) that sum up to the target.
+     *
+     * 1. Preparation: Create an empty map (or dictionary) to store numbers we have seen
+     * so far, where the key is the number itself and the value is its index in the array.
+     *
+     * 2. Iterate and Search: Start a loop that goes through each number in the input array,
+     * from the first index i=0 to the last.
+     * 3. Calculate Complement: For the current number ($\text{numbers}[i]$), calculate
+     * the complement needed to reach the target: $\text{complement} =
+     * \text{target} - \text{numbers}[i]$.
+     *
+     * 4. Check Map: Check if this complement already exists as a key in the map
+     * of seen numbers.
+     * 5. Solution Found: If the complement is in the map:This means we have found
+     * the two numbers that sum to the target.
+     * 6. The index of the first number is the value retrieved from the map using
+     * the $\text{complement}$ as the key.
+     * 7. The index of the second number is the current index $i$.
+     * 8. Return these two indices immediately.
+     * 9. Add to Map: If the $\text{complement}$ was not found, add the current
+     * number ($\text{numbers}[i]$) and its index ($i$) to the map, so it can
+     * be used as a $\text{complement}$ for subsequent numbers.
+     * 10. No Solution: If the loop finishes without finding a pair, return an
+     * empty array (or indicate that no solution was found).
      */
     //YOU MUST KNOW THIS BY HEART
     public int[] twoSum(int[] numbers, int target){
@@ -142,5 +168,36 @@ public class Solutions {
     }
 
     //        int[] numbers = {1,2,3,4,6,7,7};
-//        int[] numbers = {1,2,3,4,6,};
+    //        int[] numbers = {1,2,3,4,6,};
+    public int[] productExceptSelfNoneOptimum(int[] numbers){
+        int[] result = new int[numbers.length];
+        int total = 1;
+        for(int number : numbers){
+            total *= number;
+        }
+        for (int i = 0 ; i<numbers.length ; i++){
+            result[i] = total / numbers[i];
+        }
+        return result;
+    }
+
+    public int[] productExceptSelfOptimum(int[] nums) {
+
+        int [] result = new int[nums.length];
+
+        Arrays.fill(result, 1);
+
+        int preFix = 1;
+        for(int i=0; i<nums.length; i++){
+            result[i] = preFix;
+            preFix = preFix * nums[i];
+        }
+
+        int postFix = 1;
+        for(int i=nums.length - 1; i>=0; i--){
+            result[i] = postFix * result[i];
+            postFix = postFix * nums[i];
+        }
+        return result;
+    }
 }
