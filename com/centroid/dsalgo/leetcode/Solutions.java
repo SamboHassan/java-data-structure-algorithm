@@ -169,7 +169,7 @@ public class Solutions {
 
     //        int[] numbers = {1,2,3,4,6,7,7};
     //        int[] numbers = {1,2,3,4,6,};
-    public int[] productExceptSelfNoneOptimum(int[] numbers){
+    public int[] productExceptSelfNotOptimum(int[] numbers){
         int[] result = new int[numbers.length];
         int total = 1;
         for(int number : numbers){
@@ -187,17 +187,31 @@ public class Solutions {
 
         Arrays.fill(result, 1);
 
+        //Initializes a variable to track the product of all
+        // numbers to the left of the current index.
         int preFix = 1;
+        // Iterates from the start of the array to the end.
         for(int i=0; i<nums.length; i++){
+            // Stores the product of all elements before index i into result[i].
             result[i] = preFix;
+            // Updates the prefix product by multiplying the current number.
             preFix = preFix * nums[i];
         }
 
+        //Initializes a variable to track the product of all numbers
+        //to the right of the current index.
         int postFix = 1;
+
+        //Iterates from the end of the array to the beginning.
         for(int i=nums.length - 1; i>=0; i--){
+            //Multiplies the left-side product already stored
+            //with the right-side product.
             result[i] = postFix * result[i];
+            //Updates the postfix product by multiplying the current number.
             postFix = postFix * nums[i];
         }
+        //Returns the array containing the product of all elements except
+        // the current one.
         return result;
     }
 }
