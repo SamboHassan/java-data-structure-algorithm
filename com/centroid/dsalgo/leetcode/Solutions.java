@@ -7,6 +7,8 @@ import java.util.*;
 //two sum
 //Group Anagram
 //238 - Leetcode: Produc of Array except self: 52:13
+//4 - Median of Two Sorted Array
+
 
 public class Solutions {
     public boolean hasDuplicte(int[] nums) {
@@ -38,8 +40,7 @@ public class Solutions {
     /**
      * @param s
      * @param t
-     * @return
-     * 📝 Anagram Algorithm Steps
+     * @return 📝 Anagram Algorithm Steps
      * 1. Length Check: Immediately return False if the lengths of the two input strings,
      * $s$ and $t$, are not equal.
      * 2. Case Normalization: Convert both strings, $s$ and $t$, to lowercase to ensure
@@ -59,7 +60,7 @@ public class Solutions {
      * the strings are perfect anagrams, so return True.
      */
     public boolean isAnagram(String s, String t) {
-        if(s.length() != t.length()){
+        if (s.length() != t.length()) {
             return false;
         }
         //convert both to lowercase to ignore case match
@@ -74,18 +75,18 @@ public class Solutions {
         int[] count = new int[26];
 
         //Fill the buckets
-        for(int i=0; i<s.length(); i++){
+        for (int i = 0; i < s.length(); i++) {
             count[s.charAt(i) - 'a']++;
         }
 
         //Empty the buckets
-        for (int i =0 ; i<t.length() ; i++){
+        for (int i = 0; i < t.length(); i++) {
             count[t.charAt(i) - 'a']--;
         }
 
         //check if all buckets are empty
-        for(int i=0; i<26; i++){
-            if(count[i] != 0){
+        for (int i = 0; i < 26; i++) {
+            if (count[i] != 0) {
                 return false;
             }
         }
@@ -93,24 +94,21 @@ public class Solutions {
     }
 
     /**
-     *
      * @param numbers
      * @param target
-     * @return
-     *
-     * 📝 Algorithm in Plain English
+     * @return 📝 Algorithm in Plain English
      * The goal is to find the indices (positions) of the two numbers in the input
      * array (numbers) that sum up to the target.
-     *
+     * <p>
      * 1. Preparation: Create an empty map (or dictionary) to store numbers we have seen
      * so far, where the key is the number itself and the value is its index in the array.
-     *
+     * <p>
      * 2. Iterate and Search: Start a loop that goes through each number in the input array,
      * from the first index i=0 to the last.
      * 3. Calculate Complement: For the current number ($\text{numbers}[i]$), calculate
      * the complement needed to reach the target: $\text{complement} =
      * \text{target} - \text{numbers}[i]$.
-     *
+     * <p>
      * 4. Check Map: Check if this complement already exists as a key in the map
      * of seen numbers.
      * 5. Solution Found: If the complement is in the map:This means we have found
@@ -126,40 +124,41 @@ public class Solutions {
      * empty array (or indicate that no solution was found).
      */
     //YOU MUST KNOW THIS BY HEART
-    public int[] twoSum(int[] numbers, int target){
+    public int[] twoSum(int[] numbers, int target) {
         Map<Integer, Integer> map = new HashMap<>();
-        for (int i = 0 ; i < numbers.length ; i++){
+        for (int i = 0; i < numbers.length; i++) {
             int complement = target - numbers[i];
-            if (map.containsKey(complement)){
+            if (map.containsKey(complement)) {
                 return new int[]{map.get(complement), i};
             }
             map.put(numbers[i], i);
         }
         return new int[]{};
     }
+
     //49-Group Anagrams
-    public List<List<String>> groupAnagrams(String[] str){
-        if (str.length == 0){
+    public List<List<String>> groupAnagrams(String[] str) {
+        if (str.length == 0) {
             return new ArrayList<>();
         }
         Map<String, List> ansMap = new HashMap<>();
         int[] count = new int[26];
 
-        for(String s:str){
+        for (String s : str) {
             Arrays.fill(count, 0);
-            for(char c:s.toCharArray()){
-                count[c-'a']++;
+            for (char c : s.toCharArray()) {
+                count[c - 'a']++;
             }
 
             StringBuilder sb = new StringBuilder("");
 
-            for(int i=0; i<26; i++){
+            for (int i = 0; i < 26; i++) {
                 sb.append("#");
                 sb.append(count[i]);
             }
             String key = sb.toString();
-            if(!ansMap.containsKey(key)){
-                ansMap.put(key,new ArrayList());
+            if (!ansMap.containsKey(key)) {
+                ansMap.put(key, new ArrayList());
 
             }
             ansMap.get(key).add(s);
@@ -169,13 +168,13 @@ public class Solutions {
 
     //        int[] numbers = {1,2,3,4,6,7,7};
     //        int[] numbers = {1,2,3,4,6,};
-    public int[] productExceptSelfNotOptimum(int[] numbers){
+    public int[] productExceptSelfNotOptimum(int[] numbers) {
         int[] result = new int[numbers.length];
         int total = 1;
-        for(int number : numbers){
+        for (int number : numbers) {
             total *= number;
         }
-        for (int i = 0 ; i<numbers.length ; i++){
+        for (int i = 0; i < numbers.length; i++) {
             result[i] = total / numbers[i];
         }
         return result;
@@ -183,7 +182,7 @@ public class Solutions {
 
     public int[] productExceptSelfOptimum(int[] nums) {
 
-        int [] result = new int[nums.length];
+        int[] result = new int[nums.length];
 
         Arrays.fill(result, 1);
 
@@ -191,7 +190,7 @@ public class Solutions {
         // numbers to the left of the current index.
         int preFix = 1;
         // Iterates from the start of the array to the end.
-        for(int i=0; i<nums.length; i++){
+        for (int i = 0; i < nums.length; i++) {
             // Stores the product of all elements before index i into result[i].
             result[i] = preFix;
             // Updates the prefix product by multiplying the current number.
@@ -203,7 +202,7 @@ public class Solutions {
         int postFix = 1;
 
         //Iterates from the end of the array to the beginning.
-        for(int i=nums.length - 1; i>=0; i--){
+        for (int i = nums.length - 1; i >= 0; i--) {
             //Multiplies the left-side product already stored
             //with the right-side product.
             result[i] = postFix * result[i];
@@ -214,4 +213,76 @@ public class Solutions {
         // the current one.
         return result;
     }
+
+
+    // Public method to find the median of two sorted integer arrays
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+
+        // Ensure nums1 is the smaller array to minimize binary search range
+        if (nums1.length > nums2.length) {
+            // Swap arrays by recursively calling the method with reversed arguments
+            return findMedianSortedArrays(nums2, nums1);
+        }
+
+        // Store the length of the smaller array
+        int x = nums1.length;
+
+        // Store the length of the larger array
+        int y = nums2.length;
+
+        // Initialize binary search start index
+        int start = 0;
+
+        // Initialize binary search end index
+        int end = x;
+
+        // Perform binary search on the smaller array
+        while (start <= end) {
+
+            // Compute partition index for nums1
+            int partX = (start + end) / 2;
+
+            // Compute partition index for nums2 so left partitions contain half the elements
+            int partY = (x + y + 1) / 2 - partX;
+
+            // Get the maximum value on the left side of nums1 partition
+            int xLeft = partX == 0 ? Integer.MIN_VALUE : nums1[partX - 1];
+
+            // Get the minimum value on the right side of nums1 partition
+            int xRight = partX == x ? Integer.MAX_VALUE : nums1[partX];
+
+            // Get the maximum value on the left side of nums2 partition
+            int yLeft = partY == 0 ? Integer.MIN_VALUE : nums2[partY - 1];
+
+            // Get the minimum value on the right side of nums2 partition
+            int yRight = partY == y ? Integer.MAX_VALUE : nums2[partY];
+
+            // Check if partitions are correctly placed
+            if (xLeft <= yRight && yLeft <= xRight) {
+
+                // If total number of elements is even
+                if ((x + y) % 2 == 0) {
+                    // Return the average of the two middle values
+                    return ((double) Math.max(xLeft, yLeft) + Math.min(xRight, yRight)) / 2;
+                }
+                // If total number of elements is odd
+                else {
+                    // Return the maximum element from the left partitions
+                    return Math.max(xLeft, yLeft);
+                }
+            }
+            // If left part of nums1 is too large, move search left
+            else if (xLeft > yRight) {
+                end = partX - 1;
+            }
+            // If left part of nums1 is too small, move search right
+            else {
+                start = partX + 1;
+            }
+        }
+
+        // Fallback return value (should never be reached for valid input)
+        return 0;
+    }
+
 }
