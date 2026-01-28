@@ -1,5 +1,6 @@
 package com.centroid.dsalgo;
 
+import java.awt.print.PrinterGraphics;
 import java.sql.Array;
 import java.sql.PreparedStatement;
 import java.util.*;
@@ -8,17 +9,18 @@ import java.util.*;
 //https://www.youtube.com/c/DestinationFAANG
 //https://www.youtube.com/watch?v=T0u5nwSA0w0   -- Neetcode 150
 public class Code {
-    public static int exactMatchBS(int[] numbers, int target){
-        int left = 0;
-        int right = numbers.length - 1;
-        while (left <= right){
-            int mid = left + (right - left)/2;
-            if (numbers[mid] == target) return mid;
-            if (numbers[mid] < target) left = mid + 1;
-            else right = mid - 1;
-        }
-        return -1;
-    }
+
+   public static int exactMatch(int[] numbers, int target){
+       int left = 0;
+       int right = numbers.length - 1;
+       while (left<=right){
+           int mid = left + (right - left) / 2;
+           if (numbers[mid] == target) return mid;
+           if (numbers[mid] < target) left = mid + 1;
+           else right = mid - 1;
+       }
+       return -1;
+   }
 
     public static int firstOccurrence(int[] arr, int target) {
         int left = 0, right = arr.length - 1;
@@ -38,10 +40,26 @@ public class Code {
         return answer;
     }
 
-
+    public static int first(int[] numbers, int target){
+       int left = 0, right = numbers.length - 1;
+       int answer = -1;
+       while (left <= right){
+           int mid = left + (right - left) / 2;
+           if (numbers[mid] == target){
+               answer = mid;
+               right = mid - 1;
+           } else if (numbers[mid] < target){
+                left = mid + 1;
+           } else {
+               right = mid - 1;
+           }
+       }
+       return answer;
+    }
     public static void main(String[] args) {
-        int[] arrays = {2, 4, 7, 7, 7, 10, 13};
-        System.out.println(exactMatchBS(arrays, 7));
-        System.out.println(firstOccurrence(arrays, 7));
+        int[] arrays = {2, 4, 7, 10, 13};
+        int[] arr = {1, 2, 2, 2, 3};
+        System.out.println(exactMatch(arr, 5));
+//        System.out.println(firstOccurrence(arrays, 7));
     }
 }
